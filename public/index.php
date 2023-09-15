@@ -27,9 +27,12 @@
         <p class="page-title">呼び出しボタン<br>(カウンター)</p>
     </div>
     
-    <form action="contact.php" method="post">
-      <button type="button" name="call-button">呼び出す</button>
-    </form>
+    <section class=but>
+      <form action="contact.php" method="post">
+        <button type="button" class="call-button">呼び出す</button>
+      </form>
+    </section>
+    
     
     
 </body>
