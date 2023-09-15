@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 
@@ -28,7 +27,7 @@
     
     <section class=but>
       <form action="contact.php" method="post">
-        <button type="button" class="call-button">呼び出す</button>
+        <button type="submit" class="call-button">呼び出す</button>
       </form>
     </section>
     
