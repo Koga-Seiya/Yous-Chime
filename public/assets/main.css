@@ -57,7 +57,7 @@ body{
   -webkit-transform: translateY(2px);
   transform: translateY(2px);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
-  border-bottom: none;
+  border:solid 3px #bd6565;
 }
 
 .contact-button{
