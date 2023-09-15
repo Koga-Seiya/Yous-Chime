@@ -1,5 +1,6 @@
 <?php
-    header("contact.php")
+    header('Location :contact.php');
+    exit;
 
 ?>
 
