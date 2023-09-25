@@ -2,6 +2,7 @@
 
 ?>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -25,16 +26,16 @@
     
     <section>
         <form action="counter.php" method="post">
-            <button type="button" class="contact-button">メダルを登録したい</button>
+            <button type="button" class="contact-button" name=medal>メダルを登録したい</button>
         </form>
         <form action="counter.php" method="post">
-            <button type="button" class="contact-button">ポイントカードを押してほしい</button>
+            <button type="button" class="contact-button" name=pointcard>ポイントカードを押してほしい</button>
         </form>
         <form action="counter.php" method="post">
-            <button type="button" class="contact-button">景品の手直しをしてほしい</button>
+            <button type="button" class="contact-button" name=tenaosi>景品の手直しをしてほしい</button>
         </form>
         <form action="counter.php" method="post">
-            <button type="button" class="contact-button">その他</button>
+            <button type="button" class="contact-button" name=sonota>その他</button>
         </form>
     </section>
     
