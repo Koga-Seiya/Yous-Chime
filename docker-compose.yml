@@ -15,7 +15,7 @@ services:
     environment:
       DB_HOST: 'db'
       DB_PORT: '3306'
-      DB_NAME: 'db1'
+      DB_NAME: 'Chime_board'
       DB_USER: 'user'
       DB_PASS: 'password123456'
     ports:
