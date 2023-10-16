@@ -21,7 +21,9 @@
 
     <!-- 縦型ナビゲーションバー -->
     <div id='button-list'>
-      
+        <div id='home-button'><a ref='example'>Home</a></div>
+        <div id='map-button' ><a class="fas fa-map">map</a></div>
+
     </div>
 
     

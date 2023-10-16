@@ -42,8 +42,14 @@
   <section>
     <form action="counter.php" method="post">
       <button type="submit" class="contact-button" name="medal">メダルを登録したい</button>
+    </form>
+    <form action="counter.php" method="post">
       <button type="submit" class="contact-button" name="pointcard">ポイントカードを押してほしい</button>
+    </form>
+    <form action="counter.php" method="post">
       <button type="submit" class="contact-button" name="tenaosi">景品の手直しをしてほしい</button>
+    </form>
+    <form action="counter.php" method="post">
       <button type="submit" class="contact-button" name="sonota">その他</button>
     </form>
   </section>
