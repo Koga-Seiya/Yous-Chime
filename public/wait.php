@@ -17,12 +17,16 @@ try {
 $input_PLACE = $_COOKIE["place"];
 $input_CONTENTS = $_COOKIE["contents"];
 
+
+
+
 $errorMessage = "";
 try {
   //PCTOP画像カウント
   $stmt = $dbh->prepare("SELECT COUNT(*) from Chime_board");
   $stmt->execute();
   $wait = $stmt->fetchColumn();
+  echo $wait;
 
 } catch (RuntimeException $e) {
    $errorMessage = $e->getMessage();
@@ -30,10 +34,9 @@ try {
 
 
 
-
 try {
   //SQLを作成
-  $sql = 'INSERT INTO Chime_board (place,contents,wait) VALUES (:place,:contents,:wait)';
+  $sql = 'INSERT INTO Chime_board (place,contents) VALUES (:place,:contents)';
   $error = "エラー2";
 
   //$pdoにあるqueryメソッドを呼び出してSQLを実行
@@ -42,7 +45,7 @@ try {
 
   $stmt->bindValue(':place', $input_PLACE, PDO::PARAM_STR);
   $stmt->bindValue(':contents', $input_CONTENTS, PDO::PARAM_STR);
-  $stmt->bindValue(':wait', $wait, PDO::PARAM_STR);
+
 
   $stmt->execute();
 
@@ -51,7 +54,7 @@ try {
 } catch (PDOException $e) {
   $errorMessage = 'データベースエラー';
   //print $errorMessage;
-  //echo $e->getMessage();
+  echo $e->getMessage();
 }
 ?>
 

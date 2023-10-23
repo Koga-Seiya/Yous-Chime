@@ -1,8 +1,12 @@
+<?php
+$_SESSION["place"] = "";
+    setcookie("place","カウンター",time()+60*60*24);
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <link href='https://use.fontawesome.com/releases/v5.6.4/css/all.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link href='//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css' rel='stylesheet'/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,12 +25,18 @@
 
     <!-- 縦型ナビゲーションバー -->
     <div id='button-list'>
-        <div id='home-button'><a ref='example'>Home</a></div>
+        <form action="index.php" method="post">
+            <div id='home-button' ><button type="submit" class="fas fa-home">home</button></div>
+        </form>
         <div id='map-button' ><a class="fas fa-map">map</a></div>
 
     </div>
 
-    
+    <section class=but>
+      <form action="counter.php" method="post">
+        <button type="submit" class="call-button">呼び出す</button>
+      </form>
+    </section>
     
 </body>
 

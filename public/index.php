@@ -17,6 +17,8 @@ try {
 $stmt = $dbh->query('SELECT * from Chime_board');
 $message_length = $stmt->rowCount();
 
+
+
 function convertTz($datetime_text)
 {
   $datetime = new DateTime($datetime_text);
@@ -24,6 +26,14 @@ function convertTz($datetime_text)
   return $datetime->format('Y/m/d H:i:s');
 }
 
+if (isset($_POST['action_type']) && $_POST['action_type']) {
+  if ($_POST['action_type'] === 'delete') {
+    $input_WAIT = $_POST['id'];
+    $stmt = $dbh->prepare('DELETE FROM Chime_board Where wait = :wait');
+    $stmt ->bindValue(':wait', $input_WAIT, PDO::PARAM_INT);
+    $stmt ->execute();
+  }
+}
 ?>
 
 
@@ -58,17 +68,16 @@ function convertTz($datetime_text)
     </div>
     
     <hr class="page-divider" />
-
       <div class="message-list-cover">
-        <small>
+        <div class="number">
           <?php echo $message_length;?>件
-        </small>
+        </div>
         
         <?php while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
           <?php $lines = explode("\n",$row['contents']);?>
           <div class="message-item">
             <div class="message-title">
-              <div><?php echo htmlspecialchars($row['place'], ENT_QUOTES); ?></div>
+              <div><?php echo htmlspecialchars($row['place'], ENT_QUOTES);echo htmlspecialchars($row['wait'], ENT_QUOTES) ?></div>
               <small><?php echo convertTz($row['created_at']); ?></small>
               <div class="spacer"></div>
               <form action="/" method="post" style="text-align:right">
