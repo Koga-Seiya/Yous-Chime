@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link href='https://use.fontawesome.com/releases/v5.6.4/css/all.css' rel='stylesheet'/>
+    <link href='//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css' rel='stylesheet'/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex" />
+    <title>ホーム画面</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="./assets/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <style>
+        #dropZone {
+            width: 50%;
+            height: 100px;
+            border: 2px dashed #ccc;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        #imageContainer {
+            display: none;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <body>
+    <!-- ヘッダー -->
+    <header>
+        <a class="yous">You's Chime</a>
+    </header> 
+
+    <!-- 縦型ナビゲーションバー -->
+    <div id='button-list'>
+        <form action="index.php" method="post">
+            <div id='home-button' ><button type="submit" class="fas fa-home">home</button></div>
+        </form>
+        <form action="map.php" method="post">
+          <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
+        </form>
+        <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
+      </div>
+      
+    <div class="container">
+        <h1>Drag and Drop Image Viewer</h1>
+        <div id="dropZone">
+            <p>ドラッグ＆ドロップで画像ファイルをアップロード</p>
+        </div>
+        <img id="imageContainer" alt="Image">
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const imageContainer = document.getElementById('imageContainer');
+
+        // ドラッグアンドドロップ領域にファイルをドロップしたときの処理
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.border = '2px dashed #777';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.border = '2px dashed #ccc';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.border = '2px dashed #ccc';
+
+            const file = e.dataTransfer.files[0];
+            if (file.type.startsWith('image/')) {
+                loadImage(file);
+            } else {
+                alert('画像ファイルを選択してください。');
+            }
+        });
+
+        // 画像ファイルを読み込む関数
+        function loadImage(file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const imageDataURL = e.target.result;
+                imageContainer.src = imageDataURL;
+                imageContainer.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

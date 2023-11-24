@@ -158,19 +158,9 @@ section{
   opacity: .7;
 }
 
-.page-divider {
-  width: 80%;
-  max-width: 500px;
-  margin: 0 auto 20px auto;
-  height: 2px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: none;
-}
-
-
 /* ===== MESSAGE LIST AREA BEGIN ===== */
 .message-list-cover {
-  margin: 0 0 auto 50px;
+  margin: 30px 0 auto 50px;
   width: auto;
 }
 .number{
