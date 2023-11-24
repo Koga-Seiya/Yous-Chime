@@ -51,7 +51,7 @@ if (isset($_POST['action_type']) && $_POST['action_type']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex" />
     <title>ホーム画面</title>
-    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="./assets/reset.css"/>
     <link rel="stylesheet" href="./assets/main.css" />
     <meta http-equiv="refresh" content="3">
 </head>
@@ -95,7 +95,7 @@ if (isset($_POST['action_type']) && $_POST['action_type']) {
       <form action="map.php" method="post">
         <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
       </form>
-      <form action="map2.html" method="post">
+      <form action="map2.php" method="post">
       <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
       </form>
     </div>

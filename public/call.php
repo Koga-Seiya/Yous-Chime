@@ -1,6 +1,9 @@
 <?php
-    $_SESSION["place"] = "";
-    setcookie("place","カウンター",time()+60*60*24);
+  session_start();
+
+  $pointValue = isset($_GET['pointValue']) ? $_GET['pointValue'] : '';
+  $_SESSION["place"] = "";
+  setcookie("place", $pointValue, time() + 60 * 60 * 24);
 
 ?>
 
@@ -14,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex" />
   <title>呼び出しボタン</title>
-  <link rel="stylesheet" href="css/reset.css"/>
+  <link rel="stylesheet" href="./assets/reset.css"/>
   <link rel="stylesheet" href="./assets/main.css" />
 </head>
 
@@ -24,7 +27,7 @@
         <a class="yous">You's Chime</a>
     </header> 
     <div class="page-cover">
-        <p class="page-title">呼び出しボタン<br>(カウンター)</p>
+        <p class="page-title">呼び出しボタン<br><?php echo $pointValue;?></p>
     </div>
     
     <section class=but>
