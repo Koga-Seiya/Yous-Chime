@@ -15,61 +15,6 @@
     <!-- QRコード生成ライブラリ qrcode.js の読み込み -->
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
-    <style>
-        #dropZone {
-            width: 50%;
-            height: 100px;
-            border: 2px dashed #ccc;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            cursor: pointer;
-        }
-
-        #imageContainer {
-            position: relative;
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .point {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: red;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1;
-        }
-
-        .pointInfo {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px;
-            border: 1px solid #ccc;
-            z-index: 2;
-        }
-        #pointsTable {
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 30%;
-            background-color: #ffffff;
-        }
-
-        #pointsTable th, #pointsTable td {
-            border: 1px solid rgb(0, 0, 0);
-            padding: 8px;
-            text-align: left;
-        }
-
-        #pointsTable th {
-            background-color: #f2f2f2;
-        }
-        #delete{
-            width: 60px;
-        }
-    </style>
-
 </head>
 
 <body>
