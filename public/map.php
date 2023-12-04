@@ -32,7 +32,14 @@
     </div>
 
     <div class="container">
-        <h1>Drag and Drop Image Viewer</h1>
+        <h1>店内マップ</h1>
+
+        <div id="imageContainer">
+            <!-- 画像が表示される要素 -->
+        </div>
+        <div id="dropZone" style="display: block;">
+            <p>ドラッグ＆ドロップで画像ファイルをアップロード</p>
+        </div>
 
         <!-- ボタンを押して表示/非表示を切り替えるトグルボタン -->
         <button id="toggleDropZoneButton">画像を変更する</button>
@@ -40,12 +47,8 @@
         <!-- ポイント設定ボタン -->
         <button id="setPointButton">ポイント設定</button>
 
-        <div id="dropZone" style="display: block;">
-            <p>ドラッグ＆ドロップで画像ファイルをアップロード</p>
-        </div>
-        <div id="imageContainer">
-            <!-- 画像が表示される要素 -->
-        </div>
+        
+
         <!-- ポイントの表 -->
         <table id="pointsTable">
             <thead>
@@ -57,9 +60,6 @@
             </thead>
             <tbody id="pointsTableBody"></tbody>
         </table>
-
-        <!-- QRコード表示用の空のdiv要素 -->
-        <div id="qrcode"></div>
     </div>
     
 </div>

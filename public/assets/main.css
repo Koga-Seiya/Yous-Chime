@@ -243,7 +243,7 @@ section{
 #pointsTable {
   margin-top: 20px;
   border-collapse: collapse;
-  width: 30%;
+  width: 40%;
   background-color: #ffffff;
 }
 
@@ -258,6 +258,10 @@ section{
 }
 #delete{
   width: 60px;
+}
+
+#qrcode-container{
+  line-height: 100px;
 }
 
 /* ===== MESSAGE LIST AREA BEGIN ===== */

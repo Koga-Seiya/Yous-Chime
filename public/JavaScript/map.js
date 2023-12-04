@@ -1,96 +1,89 @@
 // map.js
-document.addEventListener('DOMContentLoaded', function() {
-    // ここに map.js のコードを追加
+document.addEventListener('DOMContentLoaded', function () {
+    // ドロップ領域やボタン、テーブルなどの要素を取得
     const dropZone = document.getElementById('dropZone');
-        const toggleButton = document.getElementById('toggleDropZoneButton');
-        const setPointButton = document.getElementById('setPointButton');
-        const imageContainer = document.getElementById('imageContainer');
-        const pointsTableBody = document.getElementById('pointsTableBody');
-        let points = JSON.parse(localStorage.getItem('points')) || [];
+    const toggleButton = document.getElementById('toggleDropZoneButton');
+    const setPointButton = document.getElementById('setPointButton');
+    const imageContainer = document.getElementById('imageContainer');
+    const pointsTableBody = document.getElementById('pointsTableBody');
+    const qrCodeContainer = document.getElementById('qrcode-container');
 
-        // ページ読み込み時に Local Storage から画像データとポイントデータを取得
-        window.onload = function () {
-            const storedImageData = localStorage.getItem('uploadedImageData');
-            if (storedImageData) {
-                imageContainer.innerHTML = `<img src="${storedImageData}" style="max-width: 100%; max-height: 100%;">`;
-            }
+    // ポイントデータを取得または初期化
+    let points = JSON.parse(localStorage.getItem('points')) || [];
 
-            displayPoints();
-        };
-
-        // ボタンを押して表示/非表示を切り替える処理
-        dropZone.style.display = 'none';
-        toggleButton.addEventListener('click', () => {
-            if (dropZone.style.display === 'none') {
-                // ドロップ領域を表示
-                dropZone.style.display = 'block';
-            } else {
-                // ドロップ領域を非表示
-                dropZone.style.display = 'none';
-            }
-        });
-
-        // 以下のコードは既存のドラッグ＆ドロップの処理と同じ
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.style.border = '2px dashed #777';
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.style.border = '2px dashed #ccc';
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.style.border = '2px dashed #ccc';
-
-            const file = e.dataTransfer.files[0];
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const imageDataURL = e.target.result;
-                    imageContainer.innerHTML = `<img src="${imageDataURL}" style="max-width: 100%; max-height: 100%;">`;
-
-                    // 画像データを Local Storage に保存
-                    localStorage.setItem('uploadedImageData', imageDataURL);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert('画像ファイルを選択してください。');
-            }
-        });
-
-        // ポイントを作成する関数
-        function createPoint(x, y, value) {
-            const point = document.createElement('div');
-            point.className = 'point';
-            point.style.left = x + 'px';
-            point.style.top = y + 'px';
-            point.setAttribute('data-value', value);
-            return point;
+    // ページ読み込み時に画像データとポイントデータを表示
+    window.onload = function () {
+        const storedImageData = localStorage.getItem('uploadedImageData');
+        if (storedImageData) {
+            imageContainer.innerHTML = `<img src="${storedImageData}" style="max-width: 100%; max-height: 100%;">`;
         }
 
+        displayPoints();
+    };
 
-// QRコードを生成する関数
-function generateQRCode(value) {
-    console.log(value);
-    const qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: value,
-        width: 128,
-        height: 128
+    // ドロップ領域の表示/非表示を切り替える処理
+    dropZone.style.display = 'none';
+    toggleButton.addEventListener('click', () => {
+        if (dropZone.style.display === 'none') {
+            dropZone.style.display = 'block';
+        } else {
+            dropZone.style.display = 'none';
+        }
     });
 
-    // 「call.php」のURLを使用してQRコードを生成
-    const callPhpURL = 'call.php?pointValue=' + encodeURIComponent(value);
-    
-    // QRコードがクリックされたときに「call.php」ページを開くためのイベントリスナーを追加
-    qrcode._el.addEventListener('click', () => {
-        window.location.href = callPhpURL;
+    // 以下のコードはドラッグ＆ドロップの処理
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.border = '2px dashed #777';
     });
 
-    return qrcode.toDataURL();
-}
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.border = '2px dashed #ccc';
+    });
 
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.style.border = '2px dashed #ccc';
+
+        const file = e.dataTransfer.files[0];
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imageDataURL = e.target.result;
+                imageContainer.innerHTML = `<img src="${imageDataURL}" style="max-width: 100%; max-height: 100%;">`;
+
+                localStorage.setItem('uploadedImageData', imageDataURL);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('画像ファイルを選択してください。');
+        }
+    });
+
+    // ポイントを作成する関数
+    function createPoint(x, y, value) {
+        const point = document.createElement('div');
+        point.className = 'point';
+        point.style.left = x + 'px';
+        point.style.top = y + 'px';
+        point.setAttribute('data-value', value);
+        return point;
+    }
+
+    // QRコードを生成して表示する関数
+    function displayQRCode(value, container) {
+        const qrcode = new QRCode(container, {
+            text: value,
+            width: 128,
+            height: 128
+        });
+
+        const callPhpURL = 'call.php?pointValue=' + encodeURIComponent(value);
+
+        qrcode._el.addEventListener('click', () => {
+            window.location.href = callPhpURL;
+        });
+    }
 
     // ポイント情報を表示する処理
     function displayPointInfo(point, rowIndex) {
@@ -101,24 +94,14 @@ function generateQRCode(value) {
         pointInfo.textContent = `${point.getAttribute('data-value')}`;
         imageContainer.appendChild(pointInfo);
 
-        // QRコード生成ボタン
-        const qrButton = document.createElement('button');
-        qrButton.textContent = 'QRコード';
-        // QRコード表示ボタンが押されたときの処理
-        qrButton.addEventListener('click', () => {
-            const value = point.getAttribute('data-value');
-            const qrCodeImageURL = generateQRCode(value); // ここを変更する
+        // QRコードを表示するコンテナを作成
+        const qrCodeContainer = document.createElement('td');
+        qrCodeContainer.className = 'qrcode-container';
+        qrCodeContainer.style.textAlign = 'center';
+        qrCodeContainer.style.verticalAlign = 'middle';
 
-            // QRコード画像を表示
-            if (qrCodeImageURL) {
-                alert(`QRコードを生成しました。`);
-                const qrCodeImage = new Image();
-                qrCodeImage.src = qrCodeImageURL;
-                document.body.appendChild(qrCodeImage);
-            } else {
-                alert(`QRコードの生成に失敗しました。`);
-            }
-        });
+        // QRコードを表示
+        displayQRCode(point.getAttribute('data-value'), qrCodeContainer);
 
         // 削除ボタン
         const deleteButton = document.createElement('button');
@@ -126,9 +109,11 @@ function generateQRCode(value) {
         deleteButton.addEventListener('click', () => {
             // ボタンがクリックされたらポイントを削除
             points.splice(rowIndex, 1);
-            // ポイントとポイント情報を非表示にする
+            // ポイントとポイント情報とQRコードを非表示にする
             point.remove();
             pointInfo.remove();
+            const parentRow = qrCodeContainer.closest('tr');
+            parentRow.remove();
             // ポイントデータを Local Storage に保存
             localStorage.setItem('points', JSON.stringify(points));
             // テーブルを再描画
@@ -136,15 +121,15 @@ function generateQRCode(value) {
         });
 
         const cell2 = document.createElement('td');
-        const cell3 = document.createElement('td');
+        cell2.appendChild(qrCodeContainer);
 
-        cell2.appendChild(qrButton);
+        const cell3 = document.createElement('td');
         cell3.appendChild(deleteButton);
 
         return [pointInfo, cell2, cell3];
     }
 
-    // ポイントを表示する処理
+    // ポイントリストを表示する処理
     function displayPoints() {
         pointsTableBody.innerHTML = ''; // テーブルの中身をクリア
 
@@ -153,65 +138,44 @@ function generateQRCode(value) {
             const createdPoint = createPoint(x, y, value);
             imageContainer.appendChild(createdPoint);
 
-            const [pointInfo, qrButtonCell, deleteButtonCell] = displayPointInfo(createdPoint, index);
+            const [pointInfo, qrCodeCell, deleteButtonCell] = displayPointInfo(createdPoint, index);
 
             // テーブルにポイント情報を追加
             const row = pointsTableBody.insertRow(index);
             const cell1 = row.insertCell(0);
             cell1.textContent = value;
 
-            row.appendChild(qrButtonCell);
+            row.appendChild(qrCodeCell);
             row.appendChild(deleteButtonCell);
         });
     }
 
-        // ポイントを非表示にする処理
-        function clearPoints() {
-            // ポイントとポイント情報を非表示にする
-            const allPoints = document.querySelectorAll('.point, .pointInfo');
-            allPoints.forEach((point) => {
-                point.remove();
-            });
+    // 「ポイント設定」ボタンが押されたときの処理
+    setPointButton.addEventListener('click', () => {
+        // メッセージを表示
+        const message = prompt('場所を指定してください（クリックでポイントを設定）');
 
-            points.length = 0;
+        // クリック時の処理を行う関数
+        function handleClick(event) {
+            const x = event.clientX - imageContainer.getBoundingClientRect().left;
+            const y = event.clientY - imageContainer.getBoundingClientRect().top;
+
+            const value = prompt('ポイントの値を入力してください:');
+
+            const point = { x, y, value };
+
+            points.push(point);
+
+            displayPoints();
+
+            imageContainer.removeEventListener('click', handleClick);
+
+            alert(`ポイントが設定されました。設定した値: ${value}, 座標: (${x}, ${y})`);
+
+            localStorage.setItem('points', JSON.stringify(points));
         }
 
-        // 「ポイント設定」ボタンが押されたときの処理
-        setPointButton.addEventListener('click', () => {
-            // メッセージを表示
-            const message = prompt('場所を指定してください（クリックでポイントを設定）');
-
-            // クリック時の処理を行う関数
-            function handleClick(event) {
-                // クリックされた座標を取得
-                const x = event.clientX - imageContainer.getBoundingClientRect().left;
-                const y = event.clientY - imageContainer.getBoundingClientRect().top;
-
-                // ポイントに値を設定
-                const value = prompt('ポイントの値を入力してください:');
-
-                // ポイントを作成
-                const point = { x, y, value };
-
-                // ポイントを配列に追加
-                points.push(point);
-
-                // ポイントを表示
-                displayPoints();
-
-                // クリック時の処理を解除
-                imageContainer.removeEventListener('click', handleClick);
-
-                // メッセージを表示
-                alert(`ポイントが設定されました。設定した値: ${value}, 座標: (${x}, ${y})`);
-
-                // ポイントデータを Local Storage に保存
-                localStorage.setItem('points', JSON.stringify(points));
-            }
-
-            // クリック時の処理を設定
-            imageContainer.addEventListener('click', handleClick);
-        });
+        // クリック時の処理を設定
+        imageContainer.addEventListener('click', handleClick);
+    });
 });
-
-
