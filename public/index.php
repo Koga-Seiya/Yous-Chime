@@ -1,44 +1,7 @@
 <?php
-try {
-  $dbHost = getenv('DB_HOST');
-  $dbPort = getenv('DB_PORT');
-  $dbName = getenv('DB_NAME');
-  $dbUser = getenv('DB_USER');
-  $dbPass = getenv('DB_PASS');
-  $dsn = "mysql:dbname=$dbName;host=$dbHost:$dbPort";
-  $dbh = new PDO($dsn, $dbUser, $dbPass);
-  //print 'データベース接続成功';
-} catch (PDOException $e) {
-  //echo 'データベース接続失敗:';
-  print $dbName;
-  echo $e->getMessage();
-}
-
-$stmt = $dbh->query('SELECT * from Chime_board');
-$message_length = $stmt->rowCount();
-//$input_obs = $_COOKIE["obs"];
-
-
-
-function convertTz($datetime_text)
-{
-  $datetime = new DateTime($datetime_text);
-  $datetime->setTimezone(new DateTimeZone('Asia/Tokyo'));
-  return $datetime->format('Y/m/d H:i:s');
-}
-
-if (isset($_POST['action_type']) && $_POST['action_type']) {
-  if ($_POST['action_type'] === 'delete') {
-    $input_WAIT = $_POST['id'];
-    $stmt = $dbh->prepare('DELETE FROM Chime_board Where wait = :wait');
-    $stmt ->bindValue(':wait', $input_WAIT, PDO::PARAM_INT);
-    $stmt ->execute();
-    header("Refresh:0.1");
-  }
-}
+include './PHP/db_connect.php';
+include './PHP/show_db.php';
 ?>
-
-
 
 <!DOCTYPE html>
 <html>

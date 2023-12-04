@@ -1,70 +1,7 @@
 <?php
-try {
-  $dbHost = getenv('DB_HOST');
-  $dbPort = getenv('DB_PORT');
-  $dbName = getenv('DB_NAME');
-  $dbUser = getenv('DB_USER');
-  $dbPass = getenv('DB_PASS');
-  $dsn = "mysql:dbname=$dbName;host=$dbHost:$dbPort";
-  $dbh = new PDO($dsn, $dbUser, $dbPass);
-  //print 'データベース接続成功';
-} catch (PDOException $e) {
-  //echo 'データベース接続失敗:';
-  print $dbName;
-  echo $e->getMessage();
-}
-
-$input_PLACE = $_COOKIE["place"];
-$input_CONTENTS = $_COOKIE["contents"];
-
-
-
-
-$errorMessage = "";
-try {
-  //PCTOP画像カウント
-  $stmt = $dbh->prepare("SELECT COUNT(*) from Chime_board");
-  $stmt->execute();
-  $wait = $stmt->fetchColumn();
-
-} catch (RuntimeException $e) {
-   $errorMessage = $e->getMessage();
-}
-
-
-//データベースに追加
-try {
-  //SQLを作成
-  $sql = 'INSERT INTO Chime_board (place,contents) VALUES (:place,:contents)';
-  $sql2 = 'INSERT INTO management_board (place,contents) VALUES (:place,:contents)';
-  $error = "エラー2";
-
-  //$pdoにあるqueryメソッドを呼び出してSQLを実行
-  $stmt = $dbh->prepare($sql);
-  $stmt2 = $dbh->prepare($sql2);
-  $error = "エラー3";
-
-  $stmt->bindValue(':place', $input_PLACE, PDO::PARAM_STR);
-  $stmt->bindValue(':contents', $input_CONTENTS, PDO::PARAM_STR);
-
-  $stmt2->bindValue(':place', $input_PLACE, PDO::PARAM_STR);
-  $stmt2->bindValue(':contents', $input_CONTENTS, PDO::PARAM_STR);
-
-
-  $stmt->execute();
-  $stmt2->execute();
-
- 
-
-  //print "データベース接続成功";
-
-} catch (PDOException $e) {
-  $errorMessage = 'データベースエラー';
-  //print $errorMessage;
-  echo $e->getMessage();
-}
+include './PHP/db_connect.php';
+include './PHP/add_db.php';
 ?>
-
 
 <!DOCTYPE html>
 <html>

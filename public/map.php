@@ -63,7 +63,7 @@
     </div>
     
 </div>
-<script src="./JavaScript/map2.js"></script>
+<script src="./JavaScript/map.js"></script>
 </body>
 
 </html>
