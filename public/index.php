@@ -68,7 +68,7 @@ if (isset($_POST['action_type']) && $_POST['action_type']) {
       const oscillator = audioCtx.createOscillator();
       //ゲインの生成
       const gainNode = audioCtx.createGain();
-      //webオーディオAPIコンテキストと接続？(ここがよく分からない)
+      //webオーディオAPIコンテキストと接続
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       //音量
@@ -95,9 +95,7 @@ if (isset($_POST['action_type']) && $_POST['action_type']) {
       <form action="map.php" method="post">
         <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
       </form>
-      <form action="map2.php" method="post">
-      <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
-      </form>
+      
     </div>
     
     

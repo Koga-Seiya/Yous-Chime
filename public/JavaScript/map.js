@@ -1,6 +1,6 @@
-// map2.js
+// map.js
 document.addEventListener('DOMContentLoaded', function() {
-    // ここに map2.js のコードを追加
+    // ここに map.js のコードを追加
     const dropZone = document.getElementById('dropZone');
         const toggleButton = document.getElementById('toggleDropZoneButton');
         const setPointButton = document.getElementById('setPointButton');
