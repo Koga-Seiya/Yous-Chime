@@ -27,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex" />
   <title>呼び出し内容</title>
-  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="./assets/reset.css" />
   <link rel="stylesheet" href="./assets/main.css" />
 </head>
 
@@ -37,7 +37,7 @@
     <a class="yous">You's Chime</a>
   </header>
 
-  <div class="contact">呼び出し内容</div>
+  <div class="page-title">呼び出し内容</div>
 
   <section>
     <form action="counter.php" method="post">

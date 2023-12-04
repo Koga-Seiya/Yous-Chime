@@ -29,13 +29,14 @@ body{
 .page-title{
   font-size: 40px;
   text-align: center;
+  margin: 1em 0;
 }
 .contact{
   font-size: 40px;
   text-align: center;
 }
 /*-------------------------------------------
-呼び出しボタン
+呼び出しボタン画面
 -------------------------------------------*/
 .call-button{
   display: inline-block;
@@ -59,7 +60,9 @@ body{
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border:solid 3px #bd6565;
 }
-
+/*-------------------------------------------
+呼び出し内容ボタン画面
+-------------------------------------------*/
 .contact-button{
   width: 250px;
   display: inline-block;
@@ -83,9 +86,39 @@ section{
   text-align: center;
 }
 
+/******************************
+お客様待ち画面
+*******************************/
+#wait_scr{
+  text-align: left;
+  width: auto;
+  height: auto;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0;
+  padding: 20px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 20px;
+  background: #b0d0fd;
+  border-radius: 15px;
+}
+#wait_scr:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top: 15px solid #b0d0fd;
+}
+
+
 
 /******************************
-キャスト
+キャスト画面
 *******************************/
 
 #button-list {
@@ -159,7 +192,7 @@ section{
 }
 
 /******************************
-マップ
+マップ画面
 *******************************/
 .container h1{
   font-size: 30px;
