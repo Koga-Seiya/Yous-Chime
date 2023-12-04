@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // ボタンを押して表示/非表示を切り替える処理
+        dropZone.style.display = 'none';
         toggleButton.addEventListener('click', () => {
             if (dropZone.style.display === 'none') {
                 // ドロップ領域を表示
