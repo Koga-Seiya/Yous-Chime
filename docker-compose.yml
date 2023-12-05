@@ -16,7 +16,7 @@ services:
       DB_PORT: '3306'
       DB_NAME: 'Chime_board'
       DB_USER: 'root'
-      DB_PASS: 'password123456'
+      DB_PASS: '******'
     ports:
       - ${PORT:-8080}:80
     volumes:
@@ -27,10 +27,10 @@ services:
     restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: password123456
+      MYSQL_ROOT_PASSWORD: ******
       MYSQL_DATABASE: Chime_board
       MYSQL_USER: root
-      MYSQL_PASSWORD: password123456
+      MYSQL_PASSWORD: ******
     ports:
       - 3306
     volumes:
@@ -43,7 +43,7 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_USER: root
-      PMA_PASSWORD: password123456
+      PMA_PASSWORD: ******
     depends_on:
       - db
     restart: unless-stopped
