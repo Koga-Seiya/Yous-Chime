@@ -3,7 +3,22 @@
 
   $pointValue = isset($_GET['pointValue']) ? $_GET['pointValue'] : '';
   $_SESSION["place"] = "";
-  setcookie("place", $pointValue, time() + 60 * 60 * 24);
+  
+
+  if (isset($_POST['call'])){
+    if($_POST['pointValue'] == "北海道"){//（仮カウンター）
+      setcookie("place", $_POST['pointValue'], time() + 60 * 60 * 24);
+      header('Location: counter.php');
+    }
+    elseif($_POST['pointValue'] == "関東"){//(仮メダル)
+      setcookie("place", $_POST['pointValue'], time() + 60 * 60 * 24);
+      header('Location: medal.php');
+    }
+    else{
+      setcookie("place", $_POST['pointValue'], time() + 60 * 60 * 24);
+      header('Location: counter.php');
+    }
+  }
 
 ?>
 
@@ -31,8 +46,9 @@
     </div>
     
     <section class=but>
-      <form action="counter.php" method="post">
-        <button type="submit" class="call-button">呼び出す</button>
+      <form action="call.php" method="post">
+        <input type="hidden" name="pointValue" value="<?php echo $pointValue; ?>">
+        <button type="submit" class="call-button" name="call">呼び出す</button>
       </form>
     </section>
     
