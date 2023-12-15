@@ -19,9 +19,7 @@
 
 <body>
     <!-- ヘッダー -->
-    <header>
-        <a class="yous">You's Chime</a>
-    </header>
+    <?php include "./assets/header.html" ?>
 
     <!-- 縦型ナビゲーションバー -->
     <div id='button-list'>

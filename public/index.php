@@ -5,8 +5,7 @@ include './PHP/show_db.php';
 
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <link href='https://use.fontawesome.com/releases/v5.6.4/css/all.css' rel='stylesheet'/>
     <link href='//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css' rel='stylesheet'/>
     <meta charset="UTF-8">
@@ -17,40 +16,11 @@ include './PHP/show_db.php';
     <link rel="stylesheet" href="./assets/reset.css"/>
     <link rel="stylesheet" href="./assets/main.css" />
     <meta http-equiv="refresh" content="3">
-</head>
+  </head>
 
-<body>
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.5.1.js"></script>
-  <script type="text/javascript">
-    let element = <?php echo $message_length;?>;
-    //document.write(element);
-    if (element != 0){
-      // 変化が発生したときの処理を記述
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      //オシレーターノードを生成
-      const oscillator = audioCtx.createOscillator();
-      //ゲインの生成
-      const gainNode = audioCtx.createGain();
-      //webオーディオAPIコンテキストと接続
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      //音量
-      gainNode.gain.value = 0.2;
-      //通知音のタイプ
-      oscillator.type = 'sine';
-      //通知音スタート
-      oscillator.start();
-      //通知音ストップ
-      oscillator.stop(0.2);
-    }
-
-    
-
-    </script>
+  <body>
     <!-- ヘッダー -->
-    <header>
-        <a class="yous">You's Chime</a>
-    </header> 
+    <?php include "./assets/header.html" ?>
 
     <!-- 縦型ナビゲーションバー -->
     <div id='button-list'>
@@ -58,39 +28,57 @@ include './PHP/show_db.php';
       <form action="map.php" method="post">
         <div id='map-button' ><button type ="submit" class="fas fa-map">map</button></div>
       </form>
-      
     </div>
     
-    
-
-      <div class="message-list-cover">
-        <div class="number" id="obs">
-          <?php echo $message_length;?>件
-        </div>
-        
-        <?php while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
-          <?php $lines = explode("\n",$row['contents']);?>
-          <div class="message-item">
-            <div class="message-title">
-              <div><?php echo htmlspecialchars($row['place'], ENT_QUOTES); ?></div>
-              <small><?php echo convertTz($row['created_at']); ?></small>
-              <div class="spacer"></div>
-              <form action="/" method="post" style="text-align:right">
-                <input type="hidden" name="id" value="<?php echo $row['wait']; ?>" />
-                <input type="hidden" name="action_type" value="delete" />
-                <button type="submit" class="message-delete-button">削除</button>
-              </form>
-            </div>
-            <?php foreach ($lines as $line) { ?>
-              <p class="message-line"><?php echo htmlspecialchars($line, ENT_QUOTES); ?></p>
-            <?php } ?>
-          </div>
-        <?php } ?>
-
-        <!--<a id="test">test<script>document.write(element);</script></a> -->
+    <div class="message-list-cover">
+      <div class="number" id="obs">
+        <?php echo $message_length;?>件
       </div>
+      <?php while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
+        <?php $lines = explode("\n",$row['contents']);?>
+        <div class="message-item">
+          <div class="message-title">
+            <div><?php echo htmlspecialchars($row['place'], ENT_QUOTES); ?></div>
+            <small><?php echo convertTz($row['created_at']); ?></small>
+            <div class="spacer"></div>
+            <form action="/" method="post" style="text-align:right">
+              <input type="hidden" name="id" value="<?php echo $row['wait']; ?>" />
+              <input type="hidden" name="action_type" value="delete" />
+              <button type="submit" class="message-delete-button">削除</button>
+            </form>
+          </div>
+          <?php foreach ($lines as $line) { ?>
+            <p class="message-line"><?php echo htmlspecialchars($line, ENT_QUOTES); ?></p>
+          <?php } ?>
+        </div>
+      <?php } ?>
+    </div>
 
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript">
+      let element = <?php echo $message_length;?>;
+      //document.write(element);
+      if (element != 0){
+        // 変化が発生したときの処理を記述
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        //オシレーターノードを生成
+        const oscillator = audioCtx.createOscillator();
+        //ゲインの生成
+        const gainNode = audioCtx.createGain();
+        //webオーディオAPIコンテキストと接続
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        //音量
+        gainNode.gain.value = 0.2;
+        //通知音のタイプ
+        oscillator.type = 'sine';
+        //通知音スタート
+        oscillator.start();
+        //通知音ストップ
+        oscillator.stop(0.2);
+      }
+    </script>
     
-</body>
+  </body>
 
 </html>

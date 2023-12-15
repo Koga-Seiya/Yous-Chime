@@ -33,9 +33,7 @@
 
 <body>
   <!-- ヘッダー -->
-  <header>
-    <a class="yous">You's Chime</a>
-  </header>
+  <?php include "./assets/header.html" ?>
 
   <div class="page-title">呼び出し内容</div>
 

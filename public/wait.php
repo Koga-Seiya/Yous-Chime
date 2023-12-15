@@ -18,9 +18,8 @@ include './PHP/add_db.php';
 
 <body>
     <!-- ヘッダー -->
-    <header>
-        <a class="yous">You's Chime</a>
-    </header> 
+    <?php include "./assets/header.html" ?>
+    
     <section>
       <div id="wait_scr">
         <p>

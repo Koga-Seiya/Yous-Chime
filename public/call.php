@@ -38,9 +38,8 @@
 
 <body>
     <!-- ヘッダー -->
-    <header>
-        <a class="yous">You's Chime</a>
-    </header> 
+    <?php include "./assets/header.html" ?>
+
     <div class="page-cover">
         <p class="page-title">呼び出しボタン<br><?php echo $pointValue;?></p>
     </div>
