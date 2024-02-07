@@ -3,7 +3,7 @@ version: '3.9'
 services:
   php:
     image: php_for_bulletin_board
-    working_dir: /home/app
+    working_dir: ./public
     build:
       context: ./
       dockerfile: Dockerfile.my_php_apache # ファイル名のみを指定
@@ -20,7 +20,7 @@ services:
     ports:
       - ${PORT:-8080}:80
     volumes:
-      - .:/home/app
+      - .:./public
 
   db:
     image: mysql:8.0
