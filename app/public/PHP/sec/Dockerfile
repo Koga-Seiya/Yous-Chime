@@ -1,0 +1,20 @@
+# PHPの公式イメージをベースにする
+FROM php:8.0-apache
+
+# PHPの拡張機能を追加する
+RUN docker-php-ext-install mysqli pdo_mysql
+
+# Apacheの設定を変更する (オプション)
+# ドキュメントルートを/publicに変更
+# リライトモジュールを有効にする
+RUN sed -ri -e 's!/var/www/html!/home/app/public!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Composerをインストールする (オプション)
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# 作業ディレクトリを設定する
+WORKDIR /home/app
+
+# Apacheの設定を反映するためにApacheを再起動する
+RUN service apache2 restart
