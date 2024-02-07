@@ -23,7 +23,7 @@
 
     <!-- 縦型ナビゲーションバー -->
     <div id='button-list'>
-        <form action="index.php" method="post">
+        <form action="home.php" method="post">
             <div id='home-button'><button type="submit" class="fas fa-home">home</button></div>
         </form>
         <div id='map-button' ><a class="fas fa-map">map</a></div>

@@ -41,7 +41,7 @@ include './PHP/add_db.php';
         </div>
     </section>
     <section>
-      <form action="index.php" method="post">
+      <form action="home.php" method="post">
         <button type="submit" class="contact-button" name="medal">戻る</button>
       </form>
     </section>
