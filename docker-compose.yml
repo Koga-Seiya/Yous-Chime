@@ -3,10 +3,10 @@ version: '3.9'
 services:
   php:
     image: php_for_bulletin_board
-    working_dir: /home/app/public
+    working_dir: /home/app/public  # ドキュメントルートを public フォルダに変更
     build:
       context: ./
-      dockerfile: Dockerfile.my_php_apache # ファイル名のみを指定
+      dockerfile: Dockerfile.my_php_apache
     tty: true
     stdin_open: true
     stop_signal: SIGKILL
@@ -20,7 +20,7 @@ services:
     ports:
       - ${PORT:-8080}:80
     volumes:
-      - ./public:/home/app/public
+      - ./public:/home/app/public  # 相対パスでホストの public フォルダをコンテナの public フォルダにマウント
 
   db:
     image: mysql:8.0
