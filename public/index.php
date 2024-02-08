@@ -1,6 +1,6 @@
 <?php
 include './PHP/db_connect.php';
-include './PHP/login.php';
+include './PHP/sec/login.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
